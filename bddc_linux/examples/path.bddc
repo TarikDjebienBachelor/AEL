@@ -1,0 +1,11 @@
+//
+// Extract a monomial from a formula:
+// more precisely the right-most path leading to ``1''
+// in the bdd.
+//
+
+path(a) := 
+if compare(a, true) then true 
+else if compare(a, false) then false
+else if compare(high(a), false) then (not root(a) and path(low(a)))
+else (root(a) and path(high(a)));

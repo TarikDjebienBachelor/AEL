@@ -1,0 +1,198 @@
+import java.awt.Point;
+import drawing.*;
+
+/** 
+ * Classe  FenetreJade
+ * @author Djebien Tarik
+ * @version avril 2010
+ */
+
+ public class FenetreJade{
+     
+    /* Attributs */
+     private DrawingFrame maFenetre;
+     private int pas;
+     private boolean modeDessin;
+     
+    /* Constructeurs */
+     
+     /**
+      * Constructor for objects of class FenetreJade.
+      */
+     
+    public FenetreJade(){
+        this.maFenetre = new DrawingFrame();
+        this.pas = 1;
+        this.modeDessin = true;
+    }// Constructeur par default
+  
+    /* Accesseurs et Mutateurs */
+    
+    /**
+     * getFenetre - Consultation de la fenetre de dessin de l'instance courante.
+     * @return la fenetre de dessin de l'instance courante.
+     */
+    public DrawingFrame getFenetre(){
+        return this.maFenetre;
+    }// getFenetre
+    
+    /**
+     * setFenetre - Modification de la fenetre de dessin de l'instance courante.
+     * @param f la fenetre de dessin de l'instance courante a modifier.
+     */
+    public void setFenetre(DrawingFrame f){
+        this.maFenetre = f;
+    }// setFenetre
+
+    /**
+     * getPas - Consultation du pas de l'instance courante.
+     * @return la valeur du pas de l'instance courante.
+     */
+    public int getPas(){
+        return this.pas;
+    }// getPas
+    
+    /**
+     * pas - Modification du pas de l'instance courante.
+     * @param p le pas de l'instance courante a modifier.
+     */
+    public void pas(int p){
+        this.pas = p;
+    }// pas
+    
+    /**
+     * getModeDessin - Consultation de l'etat du crayon de l'instance courante.
+     * @return TRUE si le crayon est en contact avec la fenetre de dessin, FALSE sinon.
+     */
+    public boolean getModeDessin(){
+        return this.modeDessin;
+    }// getModeDessin
+    
+    /* Methodes */
+    
+    /**
+     * nord - dessiner un trait vers le nord si le crayon n'est pas levé, sinon c'est juste un deplacement vers le nord.
+     */
+    public void  nord(){
+    try{
+      if (this.getModeDessin()==true){
+        this.maFenetre.drawTo(
+               new Point(
+                   (int)(this.maFenetre.getCurrentPoint().getX()) 
+                   ,
+                   (int)((this.maFenetre.getCurrentPoint().getY()) - this.getPas()) 
+               )
+        );
+      }else{
+        this.maFenetre.goTo(
+               new Point(
+                   (int)(this.maFenetre.getCurrentPoint().getX()) 
+                   ,
+                   (int)((this.maFenetre.getCurrentPoint().getY()) - this.getPas()) 
+               )
+        );
+      }
+    } catch(DrawingException e){}
+    }// nord
+    
+    /**
+     * sud - dessiner un trait vers le sud si le crayon n'est pas levé, sinon c'est juste un deplacement vers le sud.
+     */
+    public void  sud(){
+    try{
+      if (this.getModeDessin()==true){
+        this.maFenetre.drawTo(
+               new Point(
+                   (int)(this.maFenetre.getCurrentPoint().getX()) 
+                   ,
+                   (int)((this.maFenetre.getCurrentPoint().getY()) + this.getPas()) 
+               )
+        );
+      }else{
+        this.maFenetre.goTo(
+               new Point(
+                   (int)(this.maFenetre.getCurrentPoint().getX()) 
+                   ,
+                   (int)((this.maFenetre.getCurrentPoint().getY()) + this.getPas()) 
+               )
+        );
+      }
+    } catch(DrawingException e){}
+    }// sud
+    
+    /**
+     * est - dessiner un trait vers l'est si le crayon n'est pas levé, sinon c'est juste un deplacement vers l'est.
+     */
+    public void  est(){
+    try{
+      if (this.getModeDessin()==true){
+        this.maFenetre.drawTo(
+               new Point(
+                   (int)((this.maFenetre.getCurrentPoint().getX()) + this.getPas())
+                   ,
+                   (int)(this.maFenetre.getCurrentPoint().getY()) 
+               )
+        );
+      }else{
+        this.maFenetre.goTo(
+               new Point(
+                   (int)((this.maFenetre.getCurrentPoint().getX()) + this.getPas()) 
+                   ,
+                   (int)(this.maFenetre.getCurrentPoint().getY()) 
+               )
+        );
+      }
+    } catch(DrawingException e){}
+    }// est
+    
+    /**
+     * ouest - dessiner un trait vers l'ouest si le crayon n'est pas levé, sinon c'est juste un deplacement vers l'ouest.
+     */
+    public void  ouest(){
+    try{
+      if (this.getModeDessin()==true){
+        this.maFenetre.drawTo(
+               new Point(
+                   (int)((this.maFenetre.getCurrentPoint().getX()) - this.getPas())
+                   ,
+                   (int)(this.maFenetre.getCurrentPoint().getY()) 
+               )
+        );
+      }else{
+        this.maFenetre.goTo(
+               new Point(
+                   (int)((this.maFenetre.getCurrentPoint().getX()) - this.getPas()) 
+                   ,
+                   (int)(this.maFenetre.getCurrentPoint().getY()) 
+               )
+        );
+      }
+    } catch(DrawingException e){}  
+    }// ouest
+    
+    /**
+     * origine - deplacer le curseur vers une nouvelle position sans tracer de trait.
+     * @param p l'instance Point vers laquelle le curseur va se deplacer.
+     */
+    public void origine(Point p){
+      try{ this.maFenetre.goTo(p);
+         }
+      catch(DrawingException e){}
+    }// origine
+    
+    
+    /**
+     * lever - lever le crayon de la fenetre de dessin.
+     */
+    public void lever(){
+        this.modeDessin = false;
+    }// lever
+    
+    /**
+     * baisser - baisser le crayon sur la fenetre de dessin.
+     */
+    public void baisser(){
+        this.modeDessin = true;
+    }// baisser
+        
+}// class FenetreJade

@@ -1,0 +1,19 @@
+/
+// Two examples of bdd-based algortihm:
+// - negation gives the general shape of a unary operator
+// - union gives the general shape of a binary operator
+//
+
+negation(a) :=
+	if compare(a, true) then false
+	else if compare(a, false) then true
+	else ite( root(a), negation(high(a)), negation(low(a)));
+
+union(a, b) :=
+	if (compare(a, true) or compare(b, false)) then a
+	else if (compare(b, true) or compare(a, false)) then b
+	else let pivot := root(a, b) in
+	   ite(pivot,
+	       union(constrain(a, pivot), constrain(b, pivot)),
+	       union(constrain(a, not pivot), constrain(b, not pivot))
+	   );

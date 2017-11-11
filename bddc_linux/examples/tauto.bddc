@@ -1,0 +1,70 @@
+
+//
+// Some classical tautologies
+// 
+
+x.y.z.t.u;
+
+pel1 := (P => Q) = (-Q => -P);
+
+pel2 := --P = P;
+
+pel3 := -(P=>Q) => (Q=>P);
+
+pel4 := (-P=>Q) = (-Q=>P);
+
+pel5 := ((P+Q)=>(P+R))=>(P+(Q=>R));
+
+pel6 := P+-P;
+
+pel7 := P+---P;
+
+pel8 := ((P=>Q)=>P)=>P;
+
+pel9 := (((P+Q).(-P+Q)).(P+-Q))=>-(-P+-Q);
+
+
+Fx := if x then F1 else F0;
+Fy := if y then F1 else F0;
+pel18 := exist x forall y (Fx => Fy);
+
+Px := if x then P1 else P0;
+Py := if y then P1 else P0;
+Qx := if x then Q1 else Q0;
+Qy := if y then Q1 else Q0;
+Qz := if z then Q1 else Q0;
+pel19 := exist x forall y forall z ((Py => Qz) => (Px => Qx));
+
+Rx := if x then R1 else R0;
+Ry := if y then R1 else R0;
+Rz := if z then R1 else R0;
+Su := if u then S1 else S0;
+pel20 := forall x forall y exist z exist u
+	((Px.Qy)=>(Rz.Su)) => exist x exist y ((Px.Qy) => exist z Rz);
+
+pel21 := ((exist x (P => Fx)).(exist x (Fx => P))) => (exist x (P = Fx));
+
+
+Gy := if y then G1 else G0;
+Hxy := if x then (if y then H11 else H10)
+            else (if y then H01 else H00); 
+Jxy := if x then (if y then J11 else J10)
+            else (if y then J01 else J00); 
+Kx :=	if x then K1 else K0; 
+Ky := if y then K1 else K0;
+Lx :=	if x then L1 else L0; 
+Ly := if y then L1 else L0; 
+
+pel45 := 
+(
+	forall x ((Fx. forall y((Gy . Hxy)=>Jxy))=> forall y((Gy.Hxy).Ky))
+	.
+	(
+		- exist x(Lx.Kx) .
+		exist x (
+			(Fx . forall y (Hxy => Ly)) . 
+			forall y ((Gy.Hxy)=>Jxy)
+		)
+	)
+) =>
+exist x (Fx.- exist y(Gy.Hxy));

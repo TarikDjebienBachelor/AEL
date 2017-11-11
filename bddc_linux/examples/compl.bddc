@@ -1,0 +1,7 @@
+
+compl(x) :=
+	if (compare(high(x), true)) then (
+		(not root(x) or not low(x))
+	) else (
+		(root(x) or not high(x))
+	)
